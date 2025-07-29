@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Egyptian Dreams Lottery</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #0062ac 0%, #4e1d5d 100%);
+        }
+        .number-ball {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .form-section {
+            transition: all 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .form-section.active {
+            max-height: 1000px;
+        }
+        .winner-card {
+            transform: scale(0.95);
+            transition: all 0.3s ease;
+        }
+        .winner-card:hover {
+            transform: scale(1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold">
+                    <i class="fas fa-coins mr-2"></i>Egyptian Dreams Lottery
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#" class="hover:text-yellow-300">Home</a>
+                    <a href="#how-it-works" class="hover:text-yellow-300">How It Works</a>
+                    <a href="#winners" class="hover:text-yellow-300">Winners</a>
+                    <a href="#contact" class="hover:text-yellow-300">Contact</a>
+                </div>
+                <button class="md:hidden text-2xl" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="md:hidden hidden py-4" id="mobile-menu">
+                <a href="#" class="block py-2 hover:text-yellow-300">Home</a>
+                <a href="#how-it-works" class="block py-2 hover:text-yellow-300">How It Works</a>
+                <a href="#winners" class="block py-2 hover:text-yellow-300">Winners</a>
+                <a href="#contact" class="block py-2 hover:text-yellow-300">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative">
+        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+            <div class="text-center text-white px-4">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">Your Dream Awaits</h1>
+                <p class="text-xl mb-8">Participate now for a chance to win up to 20,000 EGP!</p>
+                <button id="start-btn" class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-8 rounded-full text-lg transition-all transform hover:scale-105">
+                    START NOW <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a91cbe47-5d6b-4bae-8331-a7fad9768a00.png" alt="Group of diverse people holding smartphones with the Egyptian pyramids in the background, smiling and cheering" class="w-full h-auto max-h-screen object-cover" />
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">How It Works</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gray-100 p-6 rounded-lg text-center">
+                    <div class="text-4xl text-blue-600 mb-4">
+                        <i class="fas fa-user-edit"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">1. Register</h3>
+                    <p>Fill in your personal details including name, national ID, and contact information.</p>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg text-center">
+                    <div class="text-4xl text-blue-600 mb-4">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">2. Pay</h3>
+                    <p>Choose your payment method (Vodafone Cash or InstaPay) and transfer minimum 10 EGP.</p>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg text-center">
+                    <div class="text-4xl text-blue-600 mb-4">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">3. Win</h3>
+                    <p>Receive your lucky number and wait for the draw! Prizes up to 20,000 EGP.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Form -->
+    <section id="registration" class="form-section py-16 bg-gray-100">
+        <div class="container mx-auto px-4 max-w-3xl">
+            <h2 class="text-3xl font-bold text-center mb-8">Join the Lottery</h2>
+            <form id="lottery-form" class="bg-white p-8 rounded-lg shadow-md">
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-bold mb-2" for="name">Full Name</label>
+                    <input type="text" id="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-bold mb-2" for="national-id">National ID Number</label>
+                    <input type="text" id="national-id" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-bold mb-2" for="postal-code">Postal Code</label>
+                    <input type="text" id="postal-code" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-bold mb-2" for="address">Address</label>
+                    <textarea id="address" rows="3" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required></textarea>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-bold mb-2">Payment Method</label>
+                    <div class="flex space-x-4">
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="payment" value="vodafone" class="form-radio h-5 w-5 text-blue-600" checked>
+                            <span class="ml-2">Vodafone Cash</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="payment" value="instapay" class="form-radio h-5 w-5 text-blue-600">
+                            <span class="ml-2">InstaPay</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-bold mb-2" for="amount">Amount (minimum 10 EGP)</label>
+                    <input type="number" id="amount" min="10" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-all">
+                    Submit & Get Payment Details
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Payment Details Section -->
+    <section id="payment-details" class="form-section py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-3xl">
+            <h2 class="text-3xl font-bold text-center mb-8">Payment Instructions</h2>
+            <div class="bg-gray-100 p-8 rounded-lg shadow-md">
+                <div id="vodafone-details" class="hidden">
+                    <h3 class="text-xl font-bold mb-4">Vodafone Cash Transfer</h3>
+                    <p class="mb-4">Please transfer your payment to one of the following numbers:</p>
+                    <ul class="mb-6 space-y-2">
+                        <li class="flex items-center"><span class="number-ball bg-blue-600 text-white mr-3">1</span>0101 234 5678</li>
+                        <li class="flex items-center"><span class="number-ball bg-blue-600 text-white mr-3">2</span>0109 876 5432</li>
+                        <li class="flex items-center"><span class="number-ball bg-blue-600 text-white mr-3">3</span>0111 111 2222</li>
+                    </ul>
+                </div>
+                <div id="instapay-details" class="hidden">
+                    <h3 class="text-xl font-bold mb-4">InstaPay Transfer</h3>
+                    <p class="mb-4">Please transfer your payment to one of the following numbers:</p>
+                    <ul class="mb-6 space-y-2">
+                        <li class="flex items-center"><span class="number-ball bg-green-600 text-white mr-3">1</span>0123 456 7890</li>
+                        <li class="flex items-center"><span class="number-ball bg-green-600 text-white mr-3">2</span>0127 654 3210</li>
+                        <li class="flex items-center"><span class="number-ball bg-green-600 text-white mr-3">3</span>0120 000 9999</li>
+                    </ul>
+                </div>
+                <div class="mt-6">
+                    <button id="confirm-payment" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg transition-all">
+                        I've Made the Payment - Get My Lucky Number
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lucky Number Section -->
+    <section id="lucky-number" class="form-section py-16 gradient-bg text-white">
+        <div class="container mx-auto px-4 max-w-3xl text-center">
+            <h2 class="text-3xl font-bold mb-6">Your Lucky Number</h2>
+            <div class="bg-white bg-opacity-20 p-8 rounded-lg backdrop-blur-sm">
+                <div class="text-6xl font-bold mb-8" id="result-number">- - - - -</div>
+                <p class="mb-6">This is your unique lottery number for the upcoming draw. The results will be announced on our website and we'll contact you if you win!</p>
+                <p class="text-lg">Good luck!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Winners Section -->
+    <section id="winners" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Previous Winners</h2>
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="winner-card bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="bg-blue-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-medal text-blue-600 text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">1st Prize</h3>
+                    <div class="text-2xl font-bold text-yellow-600 mb-3">20,000 EGP</div>
+                    <p class="text-gray-600">Ahmed M. from Cairo</p>
+                </div>
+                <div class="winner-card bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="bg-blue-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-medal text-gray-500 text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">2nd Prize</h3>
+                    <div class="text-2xl font-bold text-yellow-600 mb-3">15,000 EGP</div>
+                    <p class="text-gray-600">Mona S. from Alexandria</p>
+                </div>
+                <div class="winner-card bg-white p-6 rounded-lg shadow-md text-center">
+                    <div class="bg-blue-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-medal text-amber-700 text-4xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">3rd Prize</h3>
+                    <div class="text-2xl font-bold text-yellow-600 mb-3">10,000 EGP</div>
+                    <p class="text-gray-600">Karim H. from Giza</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <h2 class="text-3xl font-bold text-center mb-12">Contact Us</h2>
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Customer Service</h3>
+                    <p class="mb-4"><i class="fas fa-phone-alt text-blue-600 mr-2"></i> 12345 (24/7)</p>
+                    <p class="mb-4"><i class="fas fa-envelope text-blue-600 mr-2"></i> support@egyptianlottery.com</p>
+                    <h3 class="text-xl font-bold mt-8 mb-4">Working Hours</h3>
+                    <p>Customer service available every day</p>
+                    <p>Draws take place daily except Fridays</p>
+                </div>
+                <div>
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="contact-name">Name</label>
+                            <input type="text" id="contact-name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="contact-email">Email</label>
+                            <input type="email" id="contact-email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 mb-2" for="contact-message">Message</label>
+                            <textarea id="contact-message" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        </div>
+                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transition-all">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <div class="text-2xl font-bold mb-2">
+                        <i class="fas fa-coins mr-2"></i>Egyptian Dreams Lottery
+                    </div>
+                    <p>Your ticket to dreams come true</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-yellow-300"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-yellow-300"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover:text-yellow-300"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="border-t border-gray-600 mt-6 pt-6 text-center text-sm">
+                <p>© 2023 Egyptian Dreams Lottery. All rights reserved. Must be 18+ to play.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Start button to show registration form
+        document.getElementById('start-btn').addEventListener('click', function() {
+            document.getElementById('registration').classList.add('active');
+            document.getElementById('registration').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Form submission
+        document.getElementById('lottery-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show payment details based on selection
+            const paymentMethod = document.querySelector('input[name="payment"]:checked').value;
+            document.getElementById('vodafone-details').classList.add('hidden');
+            document.getElementById('instapay-details').classList.add('hidden');
+            
+            if (paymentMethod === 'vodafone') {
+                document.getElementById('vodafone-details').classList.remove('hidden');
+            } else {
+                document.getElementById('instapay-details').classList.remove('hidden');
+            }
+            
+            document.getElementById('payment-details').classList.add('active');
+            document.getElementById('payment-details').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Confirm payment to get lucky number
+        document.getElementById('confirm-payment').addEventListener('click', function() {
+            // Generate random 5-digit number
+            const luckyNumber = Math.floor(10000 + Math.random() * 90000);
+            document.getElementById('result-number').textContent = luckyNumber;
+            
+            document.getElementById('lucky-number').classList.add('active');
+            document.getElementById('lucky-number').scrollIntoView({ behavior: 'smooth' });
+            
+            // Reset forms
+            setTimeout(() => {
+                window.location.href = window.location.origin + window.location.pathname;
+            }, 15000);
+        });
+    </script>
+</body>
+</html>
+
